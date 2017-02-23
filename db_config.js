@@ -1,7 +1,20 @@
 var db_string = 'mongodb://achilespcl:mongodb@ds145289.mlab.com:45289/lista-telefonica-db';
-var mongoose = require('mongoose').connect(db_string);
-var db = mongoose.connection;
+var mongoose = require('mongoose');
 
+/* 
+ * Mongoose by default sets the auto_reconnect option to true.
+ * We recommend setting socket options at both the server and replica set level.
+ * We recommend a 30 second connection timeout because it allows for 
+ * plenty of time in most operating environments.
+ */
+var options = {
+    server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }
+};
+
+mongoose.connect(db_string, options);
+
+var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Erro ao Conectar ao Banco!'));
 
