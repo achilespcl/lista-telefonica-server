@@ -1,4 +1,4 @@
-var db_string = 'mongodb://127.0.0.1/screencast_restful';
+var db_string = 'mongodb://achilespcl:mongodb@ds145289.mlab.com:45289/lista-telefonica-db';
 var mongoose = require('mongoose').connect(db_string);
 var db = mongoose.connection;
 
